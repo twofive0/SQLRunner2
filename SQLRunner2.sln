@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+# SharpDevelop 5.1
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLRunner2", "SQLRunner2\SQLRunner2.csproj", "{40F64D17-E02A-4B47-932B-78CE6B2C6D01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMovement", "SQLRunner2\DataMovement\DataMovement.csproj", "{97924EE4-021B-4CA6-B5A1-1EC84A0952FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "SQLRunner2\Utils\Utils.csproj", "{5A4D8313-8C1E-49E1-B195-0AB394F80413}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40F64D17-E02A-4B47-932B-78CE6B2C6D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F64D17-E02A-4B47-932B-78CE6B2C6D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F64D17-E02A-4B47-932B-78CE6B2C6D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F64D17-E02A-4B47-932B-78CE6B2C6D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97924EE4-021B-4CA6-B5A1-1EC84A0952FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97924EE4-021B-4CA6-B5A1-1EC84A0952FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97924EE4-021B-4CA6-B5A1-1EC84A0952FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97924EE4-021B-4CA6-B5A1-1EC84A0952FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A4D8313-8C1E-49E1-B195-0AB394F80413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A4D8313-8C1E-49E1-B195-0AB394F80413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A4D8313-8C1E-49E1-B195-0AB394F80413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A4D8313-8C1E-49E1-B195-0AB394F80413}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
