@@ -1,1 +1,3 @@
-SQLRunner2 - A work in progress SQL management program
+SQLRunner2 - A lightweight swiss army knife SQL Management program for Windows
+
+Work in progress...
