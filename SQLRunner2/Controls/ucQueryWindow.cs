@@ -76,7 +76,7 @@ namespace SQLRunner2.Controls
 		public void runCurrentQueryText()
 		{
 			currentConnection = dbConnMan.getCurrentConnection();
-			
+			currentDataset.Clear();
 			currentConnection.getDBAdapter(getCurrentQueryText()).Fill(currentDataset);
 			gridResults.DataSource = bindingSource1;
 			gridResults.AutoGenerateColumns = true;
