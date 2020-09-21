@@ -296,7 +296,7 @@ namespace SQLRunner2
 			this.toolStripSeparator3,
 			this.openScriptLogToolStripMenuItem});
 			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
 			this.toolsToolStripMenuItem.Text = "&Tools";
 			// 
 			// convertMultisetToAccessToolStripMenuItem
@@ -352,27 +352,27 @@ namespace SQLRunner2
 			this.closeTabToolStripMenuItem,
 			this.renameTabToolStripMenuItem});
 			this.tabsToolStripMenuItem.Name = "tabsToolStripMenuItem";
-			this.tabsToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+			this.tabsToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
 			this.tabsToolStripMenuItem.Text = "&Tabs";
 			// 
 			// newTabToolStripMenuItem
 			// 
 			this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
-			this.newTabToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+			this.newTabToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
 			this.newTabToolStripMenuItem.Text = "New Tab";
 			this.newTabToolStripMenuItem.Click += new System.EventHandler(this.NewTabToolStripMenuItemClick);
 			// 
 			// closeTabToolStripMenuItem
 			// 
 			this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
-			this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+			this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
 			this.closeTabToolStripMenuItem.Text = "Close Tab";
 			this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.CloseTabToolStripMenuItemClick);
 			// 
 			// renameTabToolStripMenuItem
 			// 
 			this.renameTabToolStripMenuItem.Name = "renameTabToolStripMenuItem";
-			this.renameTabToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+			this.renameTabToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
 			this.renameTabToolStripMenuItem.Text = "Rename Tab";
 			this.renameTabToolStripMenuItem.Click += new System.EventHandler(this.RenameTabToolStripMenuItemClick);
 			// 
@@ -488,6 +488,7 @@ namespace SQLRunner2
 			this.btnOpenScript.Name = "btnOpenScript";
 			this.btnOpenScript.Size = new System.Drawing.Size(93, 24);
 			this.btnOpenScript.Text = "Open Script";
+			this.btnOpenScript.Click += new System.EventHandler(this.BtnOpenScriptClick);
 			// 
 			// btnSaveResultsAs
 			// 
@@ -524,7 +525,7 @@ namespace SQLRunner2
 			// 
 			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainer1.Location = new System.Drawing.Point(0, 51);
-			this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
 			this.splitContainer1.Name = "splitContainer1";
 			// 
 			// splitContainer1.Panel1
@@ -546,7 +547,7 @@ namespace SQLRunner2
 			this.tabDatabaseObjects.Controls.Add(this.tabPage3);
 			this.tabDatabaseObjects.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabDatabaseObjects.Location = new System.Drawing.Point(0, 0);
-			this.tabDatabaseObjects.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabDatabaseObjects.Margin = new System.Windows.Forms.Padding(2);
 			this.tabDatabaseObjects.Name = "tabDatabaseObjects";
 			this.tabDatabaseObjects.SelectedIndex = 0;
 			this.tabDatabaseObjects.Size = new System.Drawing.Size(201, 413);
@@ -556,9 +557,9 @@ namespace SQLRunner2
 			// 
 			this.tabPage1.Controls.Add(this.tvTablesList);
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
-			this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
 			this.tabPage1.Name = "tabPage1";
-			this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
 			this.tabPage1.Size = new System.Drawing.Size(193, 387);
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Tables";
@@ -570,7 +571,7 @@ namespace SQLRunner2
 			this.tvTablesList.ImageIndex = 0;
 			this.tvTablesList.ImageList = this.imageList1;
 			this.tvTablesList.Location = new System.Drawing.Point(2, 2);
-			this.tvTablesList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tvTablesList.Margin = new System.Windows.Forms.Padding(2);
 			this.tvTablesList.Name = "tvTablesList";
 			this.tvTablesList.SelectedImageIndex = 0;
 			this.tvTablesList.ShowLines = false;
@@ -589,10 +590,10 @@ namespace SQLRunner2
 			// 
 			this.tabPage2.Controls.Add(this.tvViewsList);
 			this.tabPage2.Location = new System.Drawing.Point(4, 22);
-			this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
 			this.tabPage2.Name = "tabPage2";
-			this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-			this.tabPage2.Size = new System.Drawing.Size(193, 394);
+			this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
+			this.tabPage2.Size = new System.Drawing.Size(193, 387);
 			this.tabPage2.TabIndex = 1;
 			this.tabPage2.Text = "Views";
 			this.tabPage2.UseVisualStyleBackColor = true;
@@ -606,17 +607,17 @@ namespace SQLRunner2
 			treeNode1.Text = "Views";
 			this.tvViewsList.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
 			treeNode1});
-			this.tvViewsList.Size = new System.Drawing.Size(189, 390);
+			this.tvViewsList.Size = new System.Drawing.Size(189, 383);
 			this.tvViewsList.TabIndex = 0;
 			// 
 			// tabPage3
 			// 
 			this.tabPage3.Controls.Add(this.tvProceduresList);
 			this.tabPage3.Location = new System.Drawing.Point(4, 22);
-			this.tabPage3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
 			this.tabPage3.Name = "tabPage3";
-			this.tabPage3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-			this.tabPage3.Size = new System.Drawing.Size(193, 394);
+			this.tabPage3.Padding = new System.Windows.Forms.Padding(2);
+			this.tabPage3.Size = new System.Drawing.Size(193, 387);
 			this.tabPage3.TabIndex = 2;
 			this.tabPage3.Text = "Procedures";
 			this.tabPage3.UseVisualStyleBackColor = true;
@@ -630,14 +631,14 @@ namespace SQLRunner2
 			treeNode2.Text = "Procedures";
 			this.tvProceduresList.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
 			treeNode2});
-			this.tvProceduresList.Size = new System.Drawing.Size(189, 390);
+			this.tvProceduresList.Size = new System.Drawing.Size(189, 383);
 			this.tvProceduresList.TabIndex = 0;
 			// 
 			// tabQueries
 			// 
 			this.tabQueries.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabQueries.Location = new System.Drawing.Point(0, 0);
-			this.tabQueries.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabQueries.Margin = new System.Windows.Forms.Padding(2);
 			this.tabQueries.Name = "tabQueries";
 			this.tabQueries.SelectedIndex = 0;
 			this.tabQueries.Size = new System.Drawing.Size(696, 413);
@@ -652,26 +653,26 @@ namespace SQLRunner2
 			this.mnuQTabsClose,
 			this.mnuQTabsRename});
 			this.mnuQueryTabs.Name = "mnuQueryTabs";
-			this.mnuQueryTabs.Size = new System.Drawing.Size(140, 70);
+			this.mnuQueryTabs.Size = new System.Drawing.Size(139, 70);
 			// 
 			// mnuQTabsNew
 			// 
 			this.mnuQTabsNew.Name = "mnuQTabsNew";
-			this.mnuQTabsNew.Size = new System.Drawing.Size(139, 22);
+			this.mnuQTabsNew.Size = new System.Drawing.Size(138, 22);
 			this.mnuQTabsNew.Text = "New Tab";
 			this.mnuQTabsNew.Click += new System.EventHandler(this.MnuQTabsNewClick);
 			// 
 			// mnuQTabsClose
 			// 
 			this.mnuQTabsClose.Name = "mnuQTabsClose";
-			this.mnuQTabsClose.Size = new System.Drawing.Size(139, 22);
+			this.mnuQTabsClose.Size = new System.Drawing.Size(138, 22);
 			this.mnuQTabsClose.Text = "Close Tab";
 			this.mnuQTabsClose.Click += new System.EventHandler(this.MnuQTabsCloseClick);
 			// 
 			// mnuQTabsRename
 			// 
 			this.mnuQTabsRename.Name = "mnuQTabsRename";
-			this.mnuQTabsRename.Size = new System.Drawing.Size(139, 22);
+			this.mnuQTabsRename.Size = new System.Drawing.Size(138, 22);
 			this.mnuQTabsRename.Text = "Rename Tab";
 			this.mnuQTabsRename.Click += new System.EventHandler(this.MnuQTabsRenameClick);
 			// 

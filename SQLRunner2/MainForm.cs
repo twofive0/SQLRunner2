@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
+using System.IO;
 using SQLRunner2.Forms;
 using SQLRunner2.Subforms;
 using SQLRunner2.Controls;
@@ -79,7 +80,7 @@ namespace SQLRunner2
 		void MainFormLoad(object sender, EventArgs e)
 		{
 			
-			Text = "SQLRunner2 - St. Patty's Version 2020.3.17.0";
+			Text = "SQLRunner2 - 2020.09.21.0";
 			
 			txtStatus.Text = "Not Connected (Press Refresh)";
 			Application.DoEvents();
@@ -294,6 +295,22 @@ namespace SQLRunner2
 		void BtnRunActionClick(object sender, EventArgs e)
 		{
 			//call update from ucQueryWindow?
+		}
+		void BtnOpenScriptClick(object sender, EventArgs e)
+		{
+			OpenFileDialog ofd = new OpenFileDialog();
+			ofd.Filter = "SQL Files (*.SQL)|*.sql|All Files (*.*)|*.*";
+			
+			DialogResult dr = ofd.ShowDialog();
+			
+			//TODO: Needs save file funcitonality, cleanup
+			
+			if (dr == DialogResult.OK)
+			{
+				newTab(ofd.FileName.ToString());
+				ucQueryWindow currentQuery = ((ucQueryWindow)tabQueries.SelectedTab.Controls[0]);
+				currentQuery.setCurrentQuery(File.ReadAllText(ofd.FileName.ToString()));
+			}
 		}
 		
 	}
