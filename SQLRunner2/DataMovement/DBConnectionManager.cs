@@ -419,6 +419,25 @@ namespace DataMovement
         	
         	return tList;
         }
+        /// <summary>
+        /// Return db command object for given sql
+        /// </summary>
+        /// <param name="SQL">SQL to use for command</param>
+        /// <returns>IDbCommand</returns>
+        public IDbCommand getDbCommand(string SQL)
+        {
+            switch (ConnectionType)
+            {
+                case "SQLite":
+                    SQLiteConnection sqliConn = new SQLiteConnection(getConnectionString());
+                    SQLiteCommand sqlCmd = new SQLiteCommand(SQL, sqliConn);
+                    return sqlCmd;
+                    break;
+                default:
+                    return new SqlCommand();
+                    break;
+            }
+        }
     
     }
     

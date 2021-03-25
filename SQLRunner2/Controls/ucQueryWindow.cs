@@ -87,23 +87,26 @@ namespace SQLRunner2.Controls
 			Application.DoEvents();
 		}
 		
-		public void runCurrentQueryTextAction()
+		public int runCurrentQueryTextAction()
 		{
 			currentConnection = dbConnMan.getCurrentConnection();
 			int recordsModified = 0;
-			
-			switch (currentConnection.ConnectionType)
-			{
-				case "SQL Server":
-					//use DataSetSQLExport?
-					//get command, then executenonquery
-				case "SQLite":
-					break;
-						
-					
-			}
-			
-		}
 
+			try
+			{
+				currentConnection = dbConnMan.getCurrentConnection();
+				IDbConnection dbcon = currentConnection.getDBConnection();
+				dbcon.Open();
+				IDbCommand cmd = dbcon.CreateCommand();
+				cmd.CommandText = getCurrentQueryText();
+				recordsModified = cmd.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+
+			return recordsModified;
+		}
 	}
 }

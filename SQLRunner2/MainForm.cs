@@ -80,7 +80,7 @@ namespace SQLRunner2
 		void MainFormLoad(object sender, EventArgs e)
 		{
 			
-			Text = "SQLRunner2 - 2020.09.21.0";
+			Text = "SQLRunner2 - 2021.03.24.0";
 			
 			txtStatus.Text = "Not Connected (Press Refresh)";
 			Application.DoEvents();
@@ -234,13 +234,15 @@ namespace SQLRunner2
 		}
 		void TvTablesListDoubleClick(object sender, EventArgs e)
 		{
-			string tableName = tvTablesList.SelectedNode.Text;
-			
-			newTab(tableName);
-			ucQueryWindow currentQuery = ((ucQueryWindow)tabQueries.SelectedTab.Controls[0]);
-			currentQuery.setCurrentQuery(getSelectTopSQL(tableName));
-			currentQuery.runCurrentQueryText();
-			
+			if (tvTablesList.SelectedNode != null)
+			{
+				string tableName = tvTablesList.SelectedNode.Text;
+
+				newTab(tableName);
+				ucQueryWindow currentQuery = ((ucQueryWindow)tabQueries.SelectedTab.Controls[0]);
+				currentQuery.setCurrentQuery(getSelectTopSQL(tableName));
+				currentQuery.runCurrentQueryText();
+			}
 		}
 		void TabQueriesMouseClick(object sender, MouseEventArgs e)
 		{
@@ -294,7 +296,10 @@ namespace SQLRunner2
 		}
 		void BtnRunActionClick(object sender, EventArgs e)
 		{
-			//call update from ucQueryWindow?
+			txtStatus.Text = "Running update...";
+			ucQueryWindow currentQuery = ((ucQueryWindow)tabQueries.SelectedTab.Controls[0]);
+			int recordsModified = currentQuery.runCurrentQueryTextAction();
+			txtStatus.Text = recordsModified.ToString() + " records modified @ " + DateTime.Now.ToString();
 		}
 		void BtnOpenScriptClick(object sender, EventArgs e)
 		{
