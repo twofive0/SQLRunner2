@@ -80,7 +80,7 @@ namespace SQLRunner2
 		void MainFormLoad(object sender, EventArgs e)
 		{
 			
-			Text = "SQLRunner2 - 2021.03.24.0";
+			Text = "SQLRunner2 - 2021.03.29.0";
 			
 			txtStatus.Text = "Not Connected (Press Refresh)";
 			Application.DoEvents();
@@ -317,6 +317,22 @@ namespace SQLRunner2
 				currentQuery.setCurrentQuery(File.ReadAllText(ofd.FileName.ToString()));
 			}
 		}
-		
-	}
+
+        private void btnSaveResultsAs_Click(object sender, EventArgs e)
+        {
+			SaveFileDialog sfd = new SaveFileDialog();
+
+			DialogResult dr = sfd.ShowDialog();
+			string expSuccess = "Nothing happened";
+
+			if (dr == DialogResult.OK)
+			{
+				ucQueryWindow currentQuery = ((ucQueryWindow)tabQueries.SelectedTab.Controls[0]);
+				expSuccess = currentQuery.fileExport(this.cboExportFormat.Text, sfd.FileName);
+			}
+
+			txtStatus.Text = expSuccess + " @ " + DateTime.Now.ToString();
+
+		}
+    }
 }

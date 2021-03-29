@@ -310,12 +310,69 @@ namespace DataMovement
             return destinationHTML.ToString(); 
         }
 
-		/// <summary>
-		/// Convert ADO.Net DataTable to a simple HTML report.
-		/// </summary>
-		/// <param name="targetTable">ADO.Net table to use</param>
-		/// <param name="fileName">Destination file path</param>
-		/// <returns></returns>
+        /// <summary>
+        /// Save data to compact MultiSet file
+        /// </summary>
+        /// <param name="dt">DataTable</param>
+        /// <param name="fileName">FileName</param>
+        /// <returns>Error message or empty string</returns>
+        public string dataTable2Multiset(ref DataTable dt, string fileName)
+        {
+            StringBuilder myString = new StringBuilder();
+            bool bFirstRecord = true;
+            int rowIndex = 0;
+            string delimiter = "¶";
+
+            try
+            {
+                bFirstRecord = true;
+                foreach (DataColumn column in dt.Columns)
+                {
+                    if (!bFirstRecord)
+                        myString.Append(delimiter);
+                    myString.Append(column.ColumnName);
+                    bFirstRecord = false;
+                }
+                myString.Append(Environment.NewLine);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    rowIndex++;
+                    bFirstRecord = true;
+                    foreach (Object field in dr.ItemArray)
+                    {
+                        if (!bFirstRecord)
+                            myString.Append(delimiter);
+                        myString.Append(field.ToString().Replace(Environment.NewLine, string.Empty).Replace("¶", string.Empty));
+                        bFirstRecord = false;
+                    }
+                    myString.Append(Environment.NewLine);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+            try
+            {
+                System.IO.File.WriteAllText(fileName, myString.ToString());
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Convert ADO.Net DataTable to a simple HTML report.
+        /// </summary>
+        /// <param name="targetTable">ADO.Net table to use</param>
+        /// <param name="fileName">Destination file path</param>
+        /// <returns></returns>
+        /// 
         public string ConvertToHtmlFile(DataTable targetTable, string fileName)
         {
             string myHtmlFile = "";
@@ -495,7 +552,6 @@ namespace DataMovement
             }
 
             return headerList;
-        }
-        
+        }        
     }
 }

@@ -82,7 +82,7 @@ namespace SQLRunner2.Controls
 			gridResults.AutoGenerateColumns = true;
 			bindingSource1.DataSource = currentDataset;
 			bindingSource1.DataMember = currentDataset.Tables[0].TableName;
-			
+			currentTable = currentDataset.Tables[0];
 			gridResults.Refresh();
 			Application.DoEvents();
 		}
@@ -107,6 +107,56 @@ namespace SQLRunner2.Controls
 			}
 
 			return recordsModified;
+		}
+
+		public string fileExport(string fileType, string fileName, char delimiter = ',')
+		{
+			DataSetFileExport exp = new DataSetFileExport();
+			bool expSuccess = false;
+			string exportText = "";
+			//Excel(.xlsx)
+			//CSV
+			//Tab Delimited
+			//Choose Delimiter
+			//XML
+			//Multiset
+
+			switch (fileType)
+			{
+				case "Excel (.xlsx)":
+					exportText = DataSetFileExport.SendDataTableToExcel(currentTable, fileName);
+					break;
+				case "CSV":
+					expSuccess = exp.DataTable2CSV(currentTable, fileName);
+					break;
+				case "Tab Delimited":
+					expSuccess = exp.DataTable2txt(currentTable, fileName, '\t');
+					break;
+				case "Choose Delimiter":
+					expSuccess = exp.DataTable2txt(currentTable, fileName, delimiter);
+					break;
+				case "XML":
+					try
+					{
+						currentTable.WriteXml(fileName, XmlWriteMode.WriteSchema);
+					}
+					catch (Exception ex)
+					{
+						exportText = ex.Message.ToString();
+					}
+					break;
+				case "Multiset":
+					MessageBox.Show("Multiset export not implemented!");
+					break;
+				default:
+					return "No file type selected!";
+			}
+
+			if (expSuccess)
+				return "File export success";
+			else
+				return "File export failed";
+
 		}
 	}
 }
