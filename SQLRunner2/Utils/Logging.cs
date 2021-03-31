@@ -31,7 +31,24 @@ namespace Utils
         	
             return bFolder + Path.DirectorySeparatorChar + applicationName + Path.DirectorySeparatorChar + "errorlog.txt";
         }
-		
+
+        /// <summary>
+        /// Get script log path plus filename for application.
+        /// </summary>
+        /// <param name="applicationName">Application Name</param>
+        /// <returns>Script Log Path as String</returns>
+        public static string getScriptLogPath(string applicationName)
+        {
+            string bFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+            if (!System.IO.Directory.Exists(bFolder + Path.DirectorySeparatorChar + applicationName))
+            {
+                System.IO.Directory.CreateDirectory(bFolder + Path.DirectorySeparatorChar + applicationName);
+            }
+
+            return bFolder + Path.DirectorySeparatorChar + applicationName + Path.DirectorySeparatorChar + "scriptlog.txt";
+        }
+
         /// <summary>
         /// Write an error to the error log file with specified debug info.
         /// </summary>
@@ -54,8 +71,31 @@ namespace Utils
             catch
             { }
         }
-		
-		/// <summary>
+
+
+        /// <summary>
+        /// Write a recently ran script to the script log with machine name and time/date.
+        /// </summary>
+        /// <param name="scriptText">Script text as string</param>
+        /// <param name="applicationName">Application name as string</param>
+        public static void LogScript(string scriptText, string applicationName)
+        {
+
+            truncateScriptLog(applicationName);
+
+            try
+            {
+                System.IO.File.AppendAllText(getScriptLogPath(applicationName), Environment.MachineName + " - " + DateTime.Now.ToString() + Environment.NewLine);
+                System.IO.File.AppendAllText(getScriptLogPath(applicationName), "----------------------------------------------------------------" + Environment.NewLine);
+                System.IO.File.AppendAllText(getScriptLogPath(applicationName), scriptText + Environment.NewLine + Environment.NewLine);
+
+            }
+            catch
+            { }
+        }
+
+
+        /// <summary>
         /// Override: Write an error to the error log file with specified debug info from specified plugin.
         /// </summary>
         /// <param name="msg">Error message as string</param>
@@ -63,7 +103,7 @@ namespace Utils
         /// <param name="stackTrace">Stack trace as string</param>
         /// <param name="applicationName">Current application name as string</param>
         /// <param name="pluginName">Plugin name as string</param>
-		public static void LogError(string msg, string source, string stackTrace, string applicationName, string pluginName)
+        public static void LogError(string msg, string source, string stackTrace, string applicationName, string pluginName)
         {
 
         	truncateErrorLog(applicationName);
@@ -109,5 +149,36 @@ namespace Utils
                 }
             }
         }
-	}
+
+        /// <summary>
+        /// Truncates the script log and creates a new one if file size is big
+        /// </summary>
+        private static void truncateScriptLog(string applicationName)
+        {
+
+            string ScriptLog = getScriptLogPath(applicationName);
+
+            if (System.IO.File.Exists(ScriptLog))
+            {
+                System.IO.FileInfo fi = new System.IO.FileInfo(ScriptLog);
+                if (fi.Length > 1000000)
+                {
+                    //if the log file gets too big for it's britches, make a copy and truncate
+                    try
+                    {
+                        string oldScriptLogPath = ScriptLog + DateTime.Now.ToString("ddMMyyy_Hmmss");
+                        System.IO.File.Copy(ScriptLog, oldScriptLogPath);
+                        string oldLog = System.IO.File.ReadAllText(ScriptLog);
+                        if (oldLog.Length > 10000)
+                        {
+                            //save last bit of stuff
+                            string newLog = "<Log truncated from " + oldScriptLogPath + ">" + oldLog.Substring(oldLog.Length - 10000, 10000);
+                            System.IO.File.WriteAllText(ScriptLog, newLog);
+                        }
+                    }
+                    catch { }
+                }
+            }
+        }
+    }
 }

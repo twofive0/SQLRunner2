@@ -146,7 +146,12 @@ namespace SQLRunner2.Controls
 					}
 					break;
 				case "Multiset":
-					MessageBox.Show("Multiset export not implemented!");
+					exp.dataTable2Multiset(ref currentTable, fileName);
+					SevenZip.SevenZipCompressor szip = new SevenZip.SevenZipCompressor();
+					szip.ScanOnlyWritable = true;
+					szip.CompressFiles(fileName + ".7z", fileName);
+					System.IO.File.Delete(fileName);
+					expSuccess = true;
 					break;
 				default:
 					return "No file type selected!";
