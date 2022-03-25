@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "97924ee4-021b-4ca6-b5a1-1ec84a0952fd": {
+      "ProjectGuid": "97924ee4-021b-4ca6-b5a1-1ec84a0952fd",
+      "DisplayName": "DataMovement",
+      "ColorIndex": 0
+    },
+    "40f64d17-e02a-4b47-932b-78ce6b2c6d01": {
+      "ProjectGuid": "40f64d17-e02a-4b47-932b-78ce6b2c6d01",
+      "DisplayName": "SQLRunner2",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

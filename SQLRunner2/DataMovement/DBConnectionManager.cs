@@ -13,10 +13,10 @@ using System.Data.SqlServerCe;
 
 namespace DataMovement
 {
-	/// <summary>
-	/// Stores/retrieves database connections.  The stored connections are saved to (UserDataFolder)\SQLRunner2\savedconnections.xml
-	/// </summary>
-	public class DBConnectionManager
+    /// <summary>
+    /// Stores/retrieves database connections.  The stored connections are saved to (UserDataFolder)\SQLRunner2\savedconnections.xml
+    /// </summary>
+    public class DBConnectionManager
     {
         public List<DBConnection> ConnectionList { get; set; }
         public string SavedConnectionsFileLocation { get; set; }
@@ -30,10 +30,10 @@ namespace DataMovement
         public DBConnectionManager(string applicationName)
         {
 
-        	ApplicationName = applicationName;
-        	
-        	string AppDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + ApplicationName;
-            
+            ApplicationName = applicationName;
+
+            string AppDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + ApplicationName;
+
             if (!Directory.Exists(AppDataDir))
             {
                 try
@@ -42,14 +42,14 @@ namespace DataMovement
                 }
                 catch (Exception ex)
                 {
-                	Utils.Logging.LogError(ex.Message, ex.Source, ex.StackTrace, ApplicationName);
+                    Utils.Logging.LogError(ex.Message, ex.Source, ex.StackTrace, ApplicationName);
                 }
             }
 
             SavedConnectionsFileLocation = AppDataDir + "\\savedconnections.xml";
 
             ConnectionList = new List<DBConnection>();
-            
+
             DBTypes = new List<string>();
             DBTypes.Add("SQL Server");
             DBTypes.Add("SQL Compact");
@@ -60,7 +60,7 @@ namespace DataMovement
             DBTypes.Add("MySQL");
 
         }
-        
+
         /// <summary>
         /// get a DBConnection object by saved connection name.
         /// </summary>
@@ -80,7 +80,7 @@ namespace DataMovement
         {
             return ConnectionList.Where(c => c.ConnectionID == connectionID).FirstOrDefault();
         }
-        
+
         /// <summary>
         /// Returns the currently active DB connection.
         /// </summary>
@@ -103,8 +103,8 @@ namespace DataMovement
 
             return currentConnection.getConnectionString();
         }
-        
-        
+
+
         /// <summary>
         /// Get connection string by connectionID.
         /// </summary>
@@ -156,7 +156,7 @@ namespace DataMovement
                 }
             }
         }
-        
+
         /// <summary>
         /// Saves stored connections to users appdata\roaming\SQLRunner2\storedconnections.xml
         /// </summary>
@@ -174,7 +174,7 @@ namespace DataMovement
         {
 
             if (!File.Exists(SavedConnectionsFileLocation)) return false;
-            
+
             try
             {
                 object import = DataSetSQLExport.LoadObjectFromXMLFile<List<DBConnection>>(SavedConnectionsFileLocation);
@@ -185,12 +185,49 @@ namespace DataMovement
             }
             catch (Exception ex)
             {
-            	Utils.Logging.LogError(ex.Message, ex.Source, ex.StackTrace, ApplicationName);
+                Utils.Logging.LogError(ex.Message, ex.Source, ex.StackTrace, ApplicationName);
                 return false;
             }
 
             return true;
         }
+
+        /// <summary>
+        /// Demonstrates how to upgrade a database with case sensitivity.
+        /// </summary>
+        public static void UpgradeDatabasewithCaseSensitive(string fileName)
+        {
+            // <Snippet2>
+            // Default case-insentive connection string.
+            // Note that Northwind.sdf is an old 3.1 version database.
+
+            string connStringCI = "Data Source= " + fileName + "; LCID= 1033";
+
+            // Set "Case Sensitive" to true to change the collation from CI to CS.
+            string connStringCS = "Data Source= " + fileName + "; LCID= 1033; Case Sensitive=true";
+
+            SqlCeEngine engine = new SqlCeEngine(connStringCI);
+
+            // The collation of the database will be case sensitive because of 
+            // the new connection string used by the Upgrade method.                
+            engine.Upgrade(connStringCS);
+
+            SqlCeConnection conn = null;
+            conn = new SqlCeConnection(connStringCI);
+            conn.Open();
+
+            //Retrieve the connection string information - notice the 'Case Sensitive' value.
+            List<KeyValuePair<string, string>> dbinfo = conn.GetDatabaseInfo();
+
+            Console.WriteLine("\nGetDatabaseInfo() results:");
+
+            foreach (KeyValuePair<string, string> kvp in dbinfo)
+            {
+                Console.WriteLine(kvp);
+            }
+            // </Snippet2>
+        }
+
     }
 
     /// <summary>
@@ -255,6 +292,9 @@ namespace DataMovement
                 case "Access MDB":
                     dbConn = new OleDbConnection(getConnectionString());
                     break;
+                case "SQL Compact":
+                    dbConn = new SqlCeConnection(getConnectionString());
+                    break;
                 default:
                     dbConn = new SqlConnection(getConnectionString());
                     break;
@@ -286,6 +326,9 @@ namespace DataMovement
                 case "Access MDB":
                     dbAdapt = new OleDbDataAdapter(SQL, getConnectionString());
                     break;
+                case "SQL Compact":
+                    dbAdapt = new SqlCeDataAdapter(SQL, getConnectionString());
+                    break ;
                 default:
                     dbAdapt = new SqlDataAdapter(SQL, getConnectionString());
                     break;
@@ -419,12 +462,14 @@ namespace DataMovement
         	
         	return tList;
         }
-        /// <summary>
-        /// Return db command object for given sql
-        /// </summary>
-        /// <param name="SQL">SQL to use for command</param>
-        /// <returns>IDbCommand</returns>
-        public IDbCommand getDbCommand(string SQL)
+
+        
+            /// <summary>
+            /// Return db command object for given sql
+            /// </summary>
+            /// <param name="SQL">SQL to use for command</param>
+            /// <returns>IDbCommand</returns>
+            public IDbCommand getDbCommand(string SQL)
         {
             switch (ConnectionType)
             {

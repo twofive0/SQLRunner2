@@ -287,5 +287,10 @@ namespace SQLRunner2.Subforms
 				setDBControls();
 			}
 		}
-	}
+
+        private void btnUpgradeSDF_Click(object sender, EventArgs e)
+        {
+			DBConnectionManager.UpgradeDatabasewithCaseSensitive(txtFilePath.Text);
+        }
+    }
 }
