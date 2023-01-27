@@ -24,6 +24,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can use the default the Revision and 
 // Build Numbers by using the '*' as shown below:
-[assembly: AssemblyVersion("2022.03.25.0")]
-[assembly: AssemblyFileVersion("2022.03.25.0")]
+[assembly: AssemblyVersion("2023.01.27.0")]
+[assembly: AssemblyFileVersion("2023.01.27.0")]
 [assembly: Guid ("1f9edf46-15cd-46e6-9aeb-dedd7a9e3951")]

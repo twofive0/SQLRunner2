@@ -80,7 +80,7 @@ namespace SQLRunner2
 		void MainFormLoad(object sender, EventArgs e)
 		{
 			
-			Text = "SQLRunner2 - 2022.03.25.0";
+			Text = "SQLRunner2 - 2023.01.27.0";
 			
 			txtStatus.Text = "Not Connected (Press Refresh)";
 			Application.DoEvents();
